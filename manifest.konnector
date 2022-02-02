@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "name": "Gaz de Bordeaux (particuliers)",
+  "name": "Gaz de Bordeaux",
   "type": "konnector",
   "language": "node",
   "icon": "icon.svg",
-  "slug": "gazdebordeaux-particuliers",
-  "source": "git@github.com:konnectors/gazdebordeaux-particuliers.git",
-  "editor": "Cozy",
+  "slug": "gazdebordeaux",
+  "source": "git@github.com:konnectors/gazdebordeaux.git",
+  "editor": "thibdrev",
   "vendor_link": "https://www.gazdebordeaux.fr",
   "frequency": "weekly",
   "categories": ["energy"],
@@ -43,7 +43,7 @@
   "locales": {
     "fr": {
       "short_description": "Récupère dans votre Cozy vos factures",
-      "long_description": "Gaz de Bordeaux est un fournisseur de gaz naturel.",
+      "long_description": "Récupère dans votre Cozy vos factures Gaz de Bordeaux. Gaz de Bordeaux est un fournisseur de gaz naturel.",
       "permissions": {
         "bank operations": {
           "description": "Utilisé pour relier les factures à des opérations bancaires"
@@ -78,12 +78,10 @@
       }
     }
   },
-
   "features": [
     "METADATA_DEDUP",
     "CARBON_COPY"
   ],
-
   "banksTransactionRegExp": "Gaz De Bordeaux",
   "manifest_version": "2"
 }
