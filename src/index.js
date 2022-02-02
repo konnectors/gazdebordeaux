@@ -64,7 +64,7 @@ async function start(fields, cozyParameters) {
     // sourceAccount given to saveBills and saveFiles
     sourceAccount: fields.login,
     // deduplication keys used for file deduplication
-    keys: ['vendorRef', 'date', 'amount']
+    keys: ['vendorRef']
   })
 
 }
