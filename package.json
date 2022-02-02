@@ -1,10 +1,10 @@
 {
-  "name": "cozy-konnector-gazdebordeaux-particuliers",
+  "name": "cozy-konnector",
   "version": "1.0.0",
   "description": "Cozy Konnector for Gaz de Bordeaux",
   "repository": {
     "type": "git",
-    "url": "git@github.com:thibdrev/gazdebordeaux-particuliers.git"
+    "url": "git@github.com:konnectors/gazdebordeaux.git"
   },
   "keywords": [],
   "author": "Cozy Cloud",
