@@ -2235,22 +2235,6 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cozy-app-publish@0.28.1:
-  version "0.28.1"
-  resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.28.1.tgz#ffc3f2cb6310cf4e9d2328d1ac9301327fac6387"
-  integrity sha512-Mq7teCMDAC9JUgv8QyfS8UPSEWyQtn0uWo1FZNh/C96FJo3hph+F1KTYiAGFrBv6xg7ZtkhLVnFanLXvhkAqFg==
-  dependencies:
-    argparse "^1.0.10"
-    chalk "^2.4.2"
-    cross-spawn "^6.0.5"
-    fs-extra "^7.0.1"
-    lodash "^4.17.19"
-    node-fetch "^2.6.1"
-    prompt "^1.0.0"
-    request "^2.88.0"
-    tar "^4.4.13"
-    verror "^1.10.1"
-
 cozy-app-publish@0.29.0:
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/cozy-app-publish/-/cozy-app-publish-0.29.0.tgz#441469014d1855f9e61dd7752a2b594de9299a1b"
