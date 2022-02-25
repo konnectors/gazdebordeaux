@@ -42,8 +42,8 @@
   "langs": ["fr", "en"],
   "locales": {
     "fr": {
-      "short_description": "Récupère dans votre Cozy vos factures Gaz de Bordeaux",
-      "long_description": "Récupère dans votre Cozy vos factures Gaz de Bordeaux. Gaz de Bordeaux est un fournisseur de gaz naturel de la région bordelaise.",
+      "short_description": "Récupère vos factures",
+      "long_description": "Gaz de Bordeaux est un fournisseur de gaz naturel et d'électricité.\n\nCe connecteur récupère dans votre Cozy vos factures depuis votre [espace client](https://espaceclient.gazdebordeaux.fr).\nIl ne fonctionne qu'avec les comptes de particuliers.\n\nSi vous le déconnectez, les informations déjà sauvegardées dans votre Cozy restent disponibles. Vous pouvez les supprimer manuellement par ailleurs.",
       "permissions": {
         "bank operations": {
           "description": "Utilisé pour relier les factures à des opérations bancaires"
@@ -53,6 +53,9 @@
         },
         "files": {
           "description": "Utilisé pour sauvegarder les factures"
+        },
+        "carboncopy": {
+          "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
         },
         "accounts": {
           "description": "Utilisé pour obtenir les données du compte"
@@ -71,6 +74,9 @@
         },
         "files": {
           "description": "Required to save the bills"
+        },
+        "carboncopy": {
+          "description": "Required for carbon copy documents"
         },
         "accounts": {
           "description": "Required to get the account's data"
