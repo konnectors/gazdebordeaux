@@ -8,6 +8,7 @@ const {
   scrape,
   log,
   utils,
+  cozyClient
 } = require('cozy-konnector-libs')
 
 const request = requestFactory({
@@ -35,7 +36,6 @@ const baseUrl = 'https://espaceclient.gazdebordeaux.fr'
 
 module.exports = new BaseKonnector(start)
 
-
 /**
  * The start function is run by the BaseKonnector instance only when it got all
  * the account information (fields).
@@ -43,9 +43,8 @@ module.exports = new BaseKonnector(start)
  * or "dev" mode, the account information come from ./konnector-dev-config.json file.
  * @param {object} cozyParameters: static parameters, independents from the account.
  * Most often, it can be a secret api key.
-*/
+ */
 async function start(fields, cozyParameters) {
-
   log('info', 'Authenticating ...')
   if (cozyParameters) log('debug', 'Found COZY_PARAMETERS')
   await authenticate.bind(this)(fields.login, fields.password)
@@ -72,15 +71,11 @@ async function start(fields, cozyParameters) {
     // deduplication keys used for file deduplication
     keys: ['vendorRef']
   })
-
 }
-
 
 // authentification using the website form
 function authenticate(username, password) {
-
   return this.signin({
-
     // <form method="post" ... id="loginForm">
     url: `${baseUrl}/login`,
     formSelector: 'form#loginForm',
@@ -119,13 +114,11 @@ function authenticate(username, password) {
   })
 }
 
-
 // The goal of this function is to parse a HTML page wrapped by a cheerio instance
 // and return an array of JS objects which will be saved to the cozy by saveBills
 // (https://github.com/konnectors/libs/blob/master/packages/cozy-konnector-libs/docs/api.md#savebills)
 // cheerio (https://cheerio.js.org/) uses the same api as jQuery (http://jquery.com/)
 function parseDocuments($) {
-
   // You can find documentation about the scrape function here:
   // https://github.com/konnectors/libs/blob/master/packages/cozy-konnector-libs/docs/api.md#scrape
   const docs = scrape(
@@ -162,65 +155,62 @@ function parseDocuments($) {
   )
 
   // on retourne chaque facture
-  return docs
-    .map(doc => ({
-      ...doc,
-      vendor: VENDOR,
-      currency: 'EUR',
-      filename: formatFilename(doc),
-      type: 'gaz',
-      fileAttributes: {
-        metadata: {
-          carbonCopy: true,
-          qualification: Qualification.getByLabel('energy_invoice')
-          datetime: utils.formatDate(doc.date),
-          datetimeLabel: 'issueDate',
-          contentAuthor: VENDOR,
-          issueDate: utils.formatDate(doc.date)
-        }
+  return docs.map(doc => ({
+    ...doc,
+    vendor: VENDOR,
+    currency: 'EUR',
+    filename: formatFilename(doc),
+    type: 'gaz',
+    fileAttributes: {
+      metadata: {
+        carbonCopy: true,
+        qualification: Qualification.getByLabel('energy_invoice'),
+        datetime: utils.formatDate(doc.date),
+        datetimeLabel: 'issueDate',
+        contentAuthor: VENDOR,
+        issueDate: utils.formatDate(doc.date)
       }
-    }))
+    }
+  }))
 }
-
 
 /**
  * Converts a string formatted date (dd/mm/yyyy) into a JavaScript Date object
  * @param {string} date
  * @returns {object Date}
-*/
+ */
 function normalizeDate(date) {
   const [day, month, year] = date.split('/')
   // JavaScript counts months from 0 to 11.
-  return new Date(year, month-1, day, 0, 0, 0)
+  return new Date(year, month - 1, day, 0, 0, 0)
 }
-
 
 /**
  * Converts a price string to a float
  * @param {string} price
  * @returns {float}
-*/
+ */
 function normalizePrice(price) {
   return parseFloat(price.replace(',', '.').trim())
 }
-
 
 /**
  * Formats a truncated invoice url to a full url
  * @param {string} url
  * @return {string}
-*/
+ */
 function formatFileurl(url) {
-  return baseUrl+ url
+  return baseUrl + url
 }
-
 
 /**
  * Formats the filename of the invoice based on its properties, such as:
  * 2020-01-01_gaz_de_bordeaux_facture_99.99EUR_12345678.pdf
  * @param {object} doc
  * @returns {string}
-*/
+ */
 function formatFilename(doc) {
-  return `${utils.formatDate(doc.date)}_gaz_de_bordeaux_facture_${doc.amount.toFixed(2)}EUR_${doc.vendorRef}.pdf`
+  return `${utils.formatDate(
+    doc.date
+  )}_gaz_de_bordeaux_facture_${doc.amount.toFixed(2)}EUR_${doc.vendorRef}.pdf`
 }
