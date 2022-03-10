@@ -26,6 +26,10 @@ const request = requestFactory({
   jar: true
 })
 
+// Importing models to get qualification by label
+const models = cozyClient.new.models
+const { Qualification } = models.document
+
 const VENDOR = 'Gaz de Bordeaux (particuliers)'
 const baseUrl = 'https://espaceclient.gazdebordeaux.fr'
 
@@ -168,11 +172,7 @@ function parseDocuments($) {
       fileAttributes: {
         metadata: {
           carbonCopy: true,
-          classification: {
-            label: 'energy_invoice',
-            purpose: 'invoice',
-            sourceCategory: 'energy'
-          },
+          qualification: Qualification.getByLabel('energy_invoice')
           datetime: utils.formatDate(doc.date),
           datetimeLabel: 'issueDate',
           contentAuthor: VENDOR,
