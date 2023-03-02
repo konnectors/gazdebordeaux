@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.0.1",
   "name": "Gaz de Bordeaux",
   "type": "konnector",
   "language": "node",
@@ -102,6 +102,9 @@
       }
     }
   },
+  "qualification_labels": [
+    "energy_invoice"
+  ],
   "features": [
     "BILLS",
     "VENDOR_REF",
