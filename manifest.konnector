@@ -102,6 +102,9 @@
       }
     }
   },
+  "qualification_labels": [
+    "energy_invoice"
+  ],
   "features": [
     "BILLS",
     "VENDOR_REF",
